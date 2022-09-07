@@ -1,22 +1,25 @@
 {% extends "base.html" %}
-
 {% load blog_extras %}
+
+
+ <!-- {% load blog_extras %} Deshabilito el uso del filtro author_details ya que no lo necesito mas en este teplate -->
 
 
 {% block content %}
   <h2>Blog Posts</h2>
   {% for post in posts %}
-  <div class="row">
-    <div class="col">
+  {% row "border-bottom" %}
+    {% col %}
       <h3>{{ post.title }}</h3>
-      <small>By {{ post.author|author_details:request.user }} on {{ post.published_at|date:"M, d Y" }}</small>
+      <!-- <small>By {{ post.author|author_details:request.user }} on {{ post.published_at|date:"M, d Y" }}</small> -->
+      {% include "blog/post-byline.html" %}
       <p>{{ post.summary }}</p>
       <p>
         ({{ post.content|wordcount }} words)
-        <a href="#">Leé Mas</a>
+        <a href="{% url 'blog-post-detail' post.slug %}">Leé Mas</a>
       </p>
-    </div>
-  </div>
+    {% endcol %}
+  {% endrow %}
   {% endfor %}
   
 
