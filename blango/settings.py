@@ -120,6 +120,12 @@ class Dev(Configuration):
       },
   ]
 
+  PASSWORD_HASHERS = [
+      'django.contrib.auth.hashers.Argon2PasswordHasher',
+      'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+      'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+      'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+  ]
 
 
   # Internationalization
@@ -151,7 +157,7 @@ class Dev(Configuration):
       "disable_existing_loggers": False,
       "filters": {
           "require_debug_false": {
-              "()": "django.utils.log.RequiredDebugFalse",
+              "()": "django.utils.log.RequireDebugFalse",
           },
       },
       "formatters": {
